@@ -19,17 +19,17 @@ cd backend
 echo Checking if Maven is installed...
 where mvn >nul 2>nul
 if %errorlevel% neq 0 (
-    echo.
-    echo WARNING: Maven (mvn) was not found on your system PATH.
-    echo.
-    echo To run the backend locally:
-    echo 1. Open the 'backend' folder in your IDE (IntelliJ IDEA, VS Code, or Eclipse).
-    echo 2. Run the 'com.internship.tool.Application' main class.
-    echo 3. Add the VM option or Active Profile: local
-    echo.
+    echo Maven (mvn) was not found on your system PATH.
+    echo Attempting to start Spring Boot Backend using Maven Wrapper...
+    if exist mvnw.cmd (
+        start mvnw.cmd spring-boot:run "-Dspring-boot.run.profiles=local"
+    ) else (
+        echo ERROR: Maven Wrapper (mvnw.cmd) was not found in backend directory.
+        pause
+    )
 ) else (
     echo Starting Spring Boot Backend with H2 local profile...
-    start mvn spring-boot:run -Dspring-boot.run.profiles=local
+    start mvn spring-boot:run "-Dspring-boot.run.profiles=local"
 )
 cd ..
 echo.
