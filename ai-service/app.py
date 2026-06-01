@@ -6,6 +6,11 @@ from routes.describe import describe_bp
 from routes.recommend import recommend_bp
 from routes.health import health_bp
 from routes.generate_report import generate_report_bp
+from werkzeug.serving import WSGIRequestHandler
+
+# Disable Werkzeug version and system version headers to fix ZAP-02
+WSGIRequestHandler.server_version = property(lambda self: "SecureServer")
+WSGIRequestHandler.sys_version = property(lambda self: "")
 
 app = Flask(__name__)
 
@@ -47,8 +52,8 @@ def add_security_headers(response):
     # Fixed ZAP-01: Define specific fallback directives for Content Security Policy
     response.headers['Content-Security-Policy'] = "default-src 'self'; script-src 'self'; style-src 'self'; object-src 'none'; frame-ancestors 'none';"
     response.headers['X-XSS-Protection'] = '1; mode=block'
-    # Fixed ZAP-02: Prevent Server header leaks
-    response.headers['Server'] = 'SecureServer'
+    # Fixed ZAP-02: Prevent Server header leaks (WSGI middleware and request handler will add it exactly once)
+    response.headers.pop('Server', None)
     return response
 
 app.register_blueprint(describe_bp)
