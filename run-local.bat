@@ -19,12 +19,12 @@ cd backend
 echo Checking if Maven is installed...
 where mvn >nul 2>nul
 if %errorlevel% neq 0 (
-    echo Maven (mvn) was not found on your system PATH.
+    echo Maven was not found on your system PATH.
     echo Attempting to start Spring Boot Backend using Maven Wrapper...
     if exist mvnw.cmd (
         start mvnw.cmd spring-boot:run "-Dspring-boot.run.profiles=local"
     ) else (
-        echo ERROR: Maven Wrapper (mvnw.cmd) was not found in backend directory.
+        echo ERROR: Maven Wrapper was not found in backend directory.
         pause
     )
 ) else (
