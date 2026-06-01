@@ -1,0 +1,22 @@
+spring:
+  datasource:
+    url: jdbc:h2:mem:quant_db;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE;MODE=PostgreSQL
+    username: sa
+    password:
+    driver-class-name: org.h2.Driver
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        show_sql: true
+        format_sql: true
+  flyway:
+    enabled: false # H2 will automatically create/update schemas based on entities via JPA
+  cache:
+    type: simple # Disable Redis and use simple in-memory CacheManager
+  data:
+    redis:
+      repositories:
+        enabled: false # Disable redis repositories
