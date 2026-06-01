@@ -1,5 +1,62 @@
+# Environment and API Key Files
 .env
-target/
+.env.*
+!.env.example
+*.env
+api_key*
+api-key*
+*api_key*
+*apikey*
+secrets*
+credentials*
+*.key
+*.pem
+
+# Dependencies
 node_modules/
+/frontend/node_modules/
+.venv/
+venv/
+env/
+dist/
+build/
+out/
+
+# Java/Maven Build Artifacts
+**/target/
+target/
+*.class
+*.jar
+*.war
+*.ear
+*.tar.gz
+*.zip
+.mvn/wrapper/maven-wrapper.jar
+
+# Python Temporary Files
 __pycache__/
+**/__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.python-version
+poetry.lock
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Databases and Local Storage
 chroma_data/
+*.db
+*.sqlite
+*.sqlite3
+
+# IDEs and Editors
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+.DS_Store
+Thumbs.db
