@@ -12,7 +12,13 @@ logger = logging.getLogger(__name__)
 
 class GroqClient:
     def __init__(self):
-        self.client = Groq(api_key=os.getenv("GROQ_API_KEY"))
+        api_key = os.getenv("GROQ_API_KEY")
+        if not api_key:
+            logger.warning("GROQ_API_KEY environment variable is not set. AI features will be disabled.")
+            self.client = None
+        else:
+            self.client = Groq(api_key=api_key)
+            
         self.model = "llama-3.3-70b-versatile"
         try:
             self.cache = redis.Redis(
@@ -33,6 +39,10 @@ class GroqClient:
         return f"groq:{hashlib.sha256(content).hexdigest()}"
 
     def call(self, messages: list, temperature=0.3, max_tokens=1000) -> str:
+        if not self.client:
+            logger.error("Groq API client is not initialized because GROQ_API_KEY is missing.")
+            return "AI Service Error: GROQ_API_KEY is not configured on the server."
+
         cache_key = self._cache_key(messages)
 
         # Try cache first
