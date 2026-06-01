@@ -98,6 +98,33 @@ Response:
     }
 ]
 
+### POST /generate-report
+Returns a structured, executive-level cyber risk report for an asset.
+
+Request:
+```json
+{
+    "asset_name": "Web Server",
+    "asset_type": "Server",
+    "description": "Public facing server with no firewall",
+    "risk_level": "Critical",
+    "risk_score": 9,
+    "vulnerabilities": ["Unencrypted traffic", "Weak credentials"],
+    "impact": "High business impact"
+}
+```
+
+Response:
+```json
+{
+    "title": "Cyber Risk Assessment Report: Web Server",
+    "summary": "...",
+    "overview": "...",
+    "key_items": ["...", "...", "..."],
+    "recommendations": ["...", "...", "..."]
+}
+```
+
 ## Running Tests
 cd ai-service
 python3 -m pytest tests/test_endpoints.py -v

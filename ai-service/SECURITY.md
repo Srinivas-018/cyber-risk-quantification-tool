@@ -104,6 +104,8 @@ No PII is sent to the Groq API at any time.
 | Missing security headers | Medium | Added 4 headers in app.py |
 | API key in code | High | Moved to .env file |
 | No fallback on AI failure | Medium | Fallback template added |
+| CSP Directive Fallback | Medium | Defined specific fallback directives (script-src, style-src, object-src, frame-ancestors) |
+| Server Header Leaks | Low | Added WSGI middleware to strip and override Server header to SecureServer |
 
 ---
 

@@ -1,0 +1,20 @@
+You are a cybersecurity expert specializing in executive reporting.
+
+Given the following asset and risk details, generate a structured, executive-level cyber risk quantification report.
+
+Asset Name: {asset_name}
+Asset Type: {asset_type}
+Description: {description}
+Risk Level: {risk_level}
+Risk Score: {risk_score}
+Vulnerabilities: {vulnerabilities_str}
+Impact: {impact}
+
+Respond ONLY with a JSON object in this exact format, nothing else:
+{{
+    "title": "<professional report title>",
+    "summary": "<executive-level summary of the overall risk status of the asset>",
+    "overview": "<overview description details of the assessed environment and vulnerability profile>",
+    "key_items": ["<key risk or finding item 1>", "<key risk or finding item 2>", "<key risk or finding item 3>"],
+    "recommendations": ["<executive action item 1>", "<executive action item 2>", "<executive action item 3>"]
+}}
