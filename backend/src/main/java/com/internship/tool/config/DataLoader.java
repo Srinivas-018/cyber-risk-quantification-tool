@@ -1,8 +1,11 @@
 package com.internship.tool.config;
 
 import com.internship.tool.entity.Asset;
+import com.internship.tool.entity.User;
 import com.internship.tool.repository.AssetRepository;
+import com.internship.tool.repository.UserRepository;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -12,16 +15,39 @@ import java.util.List;
 public class DataLoader implements CommandLineRunner {
 
     private final AssetRepository assetRepository;
+    private final UserRepository userRepository;
+    private final PasswordEncoder passwordEncoder;
 
-    public DataLoader(AssetRepository assetRepository) {
+    public DataLoader(AssetRepository assetRepository, UserRepository userRepository, PasswordEncoder passwordEncoder) {
         this.assetRepository = assetRepository;
+        this.userRepository = userRepository;
+        this.passwordEncoder = passwordEncoder;
     }
 
     @Override
     public void run(String... args) throws Exception {
+        if (userRepository.count() == 0) {
+            seedUsers();
+        }
         if (assetRepository.countActiveAssets() == 0) {
             seedAssets();
         }
+    }
+
+    private void seedUsers() {
+        User admin = new User();
+        admin.setUsername("admin");
+        admin.setPassword(passwordEncoder.encode("admin"));
+        admin.setEmail("admin@internship.com");
+        admin.setRole("ADMIN");
+        userRepository.save(admin);
+
+        User user = new User();
+        user.setUsername("user");
+        user.setPassword(passwordEncoder.encode("admin"));
+        user.setEmail("user@internship.com");
+        user.setRole("USER");
+        userRepository.save(user);
     }
 
     private void seedAssets() {
