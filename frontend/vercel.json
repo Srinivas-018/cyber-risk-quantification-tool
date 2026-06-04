@@ -1,4 +1,16 @@
 {
+  "rewrites": [
+    {
+      "source": "/api/:path*",
+      "destination": "https://cyber-risk-backend-6ex3.onrender.com/api/:path*"
+    },
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
+    }
+  ]
+},
+{
   "headers": [
     {
       "source": "/(.*)",
@@ -37,18 +49,6 @@
           "value": "public, max-age=31536000, immutable"
         }
       ]
-    }
-  ]
-},
-{
-  "rewrites": [
-    {
-      "source": "/api/:path*",
-      "destination": "https://cyber-risk-backend-6ex3.onrender.com/api/:path*"
-    },
-    {
-      "source": "/(.*)",
-      "destination": "/index.html"
     }
   ]
 }
