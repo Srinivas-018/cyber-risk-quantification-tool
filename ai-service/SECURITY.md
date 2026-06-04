@@ -117,6 +117,6 @@ No PII is sent to the Groq API at any time.
 ---
 
 ## Team Sign-off
-- AI Developer 2: Yashaswini — All security tests completed
+- All security tests completed
 - Date: 29 April 2026
 - Status: APPROVED ✅
