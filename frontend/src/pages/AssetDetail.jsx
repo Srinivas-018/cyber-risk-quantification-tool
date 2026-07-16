@@ -1,12 +1,11 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { useParams, Link, useNavigate } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import { AuthContext } from '../context/AuthContext';
 import api from '../services/api';
 
 const AssetDetail = () => {
   const { id } = useParams();
-  const navigate = useNavigate();
-  const { user, logout } = useContext(AuthContext);
+  const { user } = useContext(AuthContext);
 
   const [asset, setAsset] = useState(null);
   const [recommendations, setRecommendations] = useState([]);
@@ -60,10 +59,7 @@ const AssetDetail = () => {
     }
   };
 
-  const handleLogout = () => {
-    logout();
-    navigate('/login');
-  };
+
 
   if (loading) {
     return (
@@ -123,9 +119,6 @@ const AssetDetail = () => {
           </nav>
           <div className="flex items-center gap-4 border-l border-slate-200 pl-4">
             <span className="text-sm text-slate-600">Hi, <strong className="text-slate-900">{user?.username}</strong> ({user?.role})</span>
-            <button onClick={handleLogout} className="text-sm font-medium text-red-600 hover:text-red-500 transition-colors">
-              Sign Out
-            </button>
           </div>
         </div>
       </header>

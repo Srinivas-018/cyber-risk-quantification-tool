@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { AuthContext } from '../context/AuthContext';
 import api from '../services/api';
 import {
@@ -23,8 +23,7 @@ const Dashboard = () => {
   const [stats, setStats] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
-  const { user, logout } = useContext(AuthContext);
-  const navigate = useNavigate();
+  const { user } = useContext(AuthContext);
 
   useEffect(() => {
     const fetchStats = async () => {
@@ -40,10 +39,7 @@ const Dashboard = () => {
     fetchStats();
   }, []);
 
-  const handleLogout = () => {
-    logout();
-    navigate('/login');
-  };
+
 
   if (loading) {
     return (
@@ -88,9 +84,6 @@ const Dashboard = () => {
           </nav>
           <div className="flex items-center gap-4 border-l border-slate-200 pl-4">
             <span className="text-sm text-slate-600">Hi, <strong className="text-slate-900">{user?.username}</strong> ({user?.role})</span>
-            <button onClick={handleLogout} className="text-sm font-medium text-red-600 hover:text-red-500 transition-colors">
-              Sign Out
-            </button>
           </div>
         </div>
       </header>

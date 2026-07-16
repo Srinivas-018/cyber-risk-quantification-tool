@@ -4,8 +4,6 @@ import { AuthProvider } from './context/AuthContext';
 import ProtectedRoute from './components/ProtectedRoute';
 
 // Pages
-import Login from './pages/Login';
-import Register from './pages/Register';
 import Dashboard from './pages/Dashboard';
 import AssetList from './pages/AssetList';
 import AssetForm from './pages/AssetForm';
@@ -16,10 +14,6 @@ function App() {
     <Router>
       <AuthProvider>
         <Routes>
-          {/* Public Authentication Routes */}
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
-
           {/* Protected Application Routes */}
           <Route path="/" element={
             <ProtectedRoute>
