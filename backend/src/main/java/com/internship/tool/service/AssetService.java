@@ -38,7 +38,7 @@ public class AssetService {
 
         asset.setAssetName(details.getAssetName());
         asset.setAssetType(details.getAssetType());
-        
+
         // Re-quantify if description changed
         if (!Objects.equals(asset.getDescription(), details.getDescription())) {
             asset.setDescription(details.getDescription());
@@ -69,6 +69,7 @@ public class AssetService {
         assetRepository.save(asset);
     }
 
+    @SuppressWarnings("unchecked")
     @Transactional(readOnly = true)
     public List<Map<String, Object>> getRecommendations(Long id) {
         Asset asset = getAssetById(id)
@@ -140,14 +141,18 @@ public class AssetService {
         // Fallback report
         Map<String, Object> fallbackReport = new HashMap<>();
         fallbackReport.put("title", "Executive Cyber Risk Report - " + asset.getAssetName());
-        fallbackReport.put("summary", "System risk assessment report details a risk level of " + asset.getRiskLevel() + ".");
-        fallbackReport.put("overview", "Overview: Evaluated " + asset.getAssetName() + " (" + asset.getAssetType() + ") risk factors.");
-        fallbackReport.put("key_items", List.of("Assessed Risk Score: " + asset.getRiskScore(), "Identified Vulnerabilities: " + asset.getVulnerabilities()));
+        fallbackReport.put("summary",
+                "System risk assessment report details a risk level of " + asset.getRiskLevel() + ".");
+        fallbackReport.put("overview",
+                "Overview: Evaluated " + asset.getAssetName() + " (" + asset.getAssetType() + ") risk factors.");
+        fallbackReport.put("key_items", List.of("Assessed Risk Score: " + asset.getRiskScore(),
+                "Identified Vulnerabilities: " + asset.getVulnerabilities()));
         fallbackReport.put("recommendations", List.of("Conduct manual verification", "Verify input sanitization"));
         fallbackReport.put("is_fallback", true);
         return fallbackReport;
     }
 
+    @SuppressWarnings("unchecked")
     private Asset quantifyRisk(Asset asset) {
         Map<String, Object> payload = new HashMap<>();
         payload.put("asset_name", asset.getAssetName());

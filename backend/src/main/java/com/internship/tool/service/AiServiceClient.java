@@ -35,9 +35,10 @@ public class AiServiceClient {
         return callAi("/generate-report", payload);
     }
 
+    @SuppressWarnings("unchecked")
     private Map<String, Object> callAi(String path, Map<String, Object> payload) {
         try {
-            return restTemplate.postForObject(aiServiceUrl + path, payload, Map.class);
+            return (Map<String, Object>) restTemplate.postForObject(aiServiceUrl + path, payload, Map.class);
         } catch (Exception e) {
             System.err.println("AI Service error: " + e.getMessage());
             return null;
