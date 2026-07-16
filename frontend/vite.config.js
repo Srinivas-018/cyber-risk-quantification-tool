@@ -13,5 +13,8 @@ export default defineConfig({
       'X-Content-Type-Options': 'nosniff',
       'Server': 'SecureServer'
     }
+  },
+  build: {
+    chunkSizeWarningLimit: 1000
   }
 })
