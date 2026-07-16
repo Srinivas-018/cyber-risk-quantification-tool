@@ -21,7 +21,7 @@ for cyber risk assessment.
 ## Setup
 
 ### 1. Clone the repo
-git clone https://github.com/yashaswinijayakumarr/cyber-risk-quantification-tool.git
+git clone https://github.com/Srinivas-018/cyber-risk-quantification-tool.git
 cd cyber-risk-quantification-tool/ai-service
 
 ### 2. Install dependencies
